@@ -1,0 +1,22 @@
+<div class="page-header">
+	<h3>
+		<?php echo $this->translate('Adicionar Novo Usuário') ?>
+	</h3>
+</div>
+<a class="btn btn-info" href="<?php echo $this->url('dsl-power-users'); ?>">
+	<span class="glyphicon glyphicon-backward"></span>
+	<?php echo $this->translate('Cancelar'); ?>
+</a>
+<br />
+<br />
+<?php echo $this->form()->openTag($form); ?>
+		<div class="form-group">
+			<!-- <div class="row">
+				<div class="col-sm-3">
+					
+				</div>
+			</div> -->
+			<?php echo $this->formRow($form->get('displayName')); ?>
+			<?php echo $this->formRow($form->get('username')); ?>
+		</div>
+<?php echo $this->form()->closeTag($form); ?>

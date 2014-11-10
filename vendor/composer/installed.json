@@ -1152,6 +1152,64 @@
         ]
     },
     {
+        "name": "zf-commons/zfc-user-doctrine-orm",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ZF-Commons/ZfcUserDoctrineORM.git",
+            "reference": "9a2e148c9a5a03ca8592b93ea28a21e37b06e053"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ZF-Commons/ZfcUserDoctrineORM/zipball/9a2e148c9a5a03ca8592b93ea28a21e37b06e053",
+            "reference": "9a2e148c9a5a03ca8592b93ea28a21e37b06e053",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/doctrine-orm-module": "0.*",
+            "php": ">=5.3.3",
+            "zf-commons/zfc-user": "1.*"
+        },
+        "time": "2014-04-18 10:21:19",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.1.x-dev"
+            }
+        },
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "ZfcUserDoctrineORM": "src/"
+            },
+            "classmap": [
+                "./"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Kyle Spraggs",
+                "email": "theman@spiffyjr.me",
+                "homepage": "http://www.spiffyjr.me/"
+            },
+            {
+                "name": "Evan Coury",
+                "email": "me@evancoury.com",
+                "homepage": "http://blog.evan.pro/"
+            }
+        ],
+        "description": "Doctrine2 ORM storage adapter for ZfcUser.",
+        "homepage": "https://github.com/ZF-Commons/ZfcUserDoctrineORM",
+        "keywords": [
+            "zf2"
+        ]
+    },
+    {
         "name": "zendframework/zend-developer-tools",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
@@ -1211,64 +1269,6 @@
             "debug",
             "developer",
             "module",
-            "zf2"
-        ]
-    },
-    {
-        "name": "zf-commons/zfc-user-doctrine-orm",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/ZF-Commons/ZfcUserDoctrineORM.git",
-            "reference": "9a2e148c9a5a03ca8592b93ea28a21e37b06e053"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/ZF-Commons/ZfcUserDoctrineORM/zipball/9a2e148c9a5a03ca8592b93ea28a21e37b06e053",
-            "reference": "9a2e148c9a5a03ca8592b93ea28a21e37b06e053",
-            "shasum": ""
-        },
-        "require": {
-            "doctrine/doctrine-orm-module": "0.*",
-            "php": ">=5.3.3",
-            "zf-commons/zfc-user": "1.*"
-        },
-        "time": "2014-04-18 10:21:19",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "0.1.x-dev"
-            }
-        },
-        "installation-source": "source",
-        "autoload": {
-            "psr-0": {
-                "ZfcUserDoctrineORM": "src/"
-            },
-            "classmap": [
-                "./"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Kyle Spraggs",
-                "email": "theman@spiffyjr.me",
-                "homepage": "http://www.spiffyjr.me/"
-            },
-            {
-                "name": "Evan Coury",
-                "email": "me@evancoury.com",
-                "homepage": "http://blog.evan.pro/"
-            }
-        ],
-        "description": "Doctrine2 ORM storage adapter for ZfcUser.",
-        "homepage": "https://github.com/ZF-Commons/ZfcUserDoctrineORM",
-        "keywords": [
             "zf2"
         ]
     }

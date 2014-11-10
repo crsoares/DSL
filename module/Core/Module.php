@@ -36,4 +36,13 @@ class Module
             ),
         );
     }
+
+    public function getFormElementConfig()
+    {
+        return array(
+            'invokables' => array(
+                'CadastroUsersForm' => 'Core\Form\CadastroUsersForm', 
+            )
+        );
+    }
 }

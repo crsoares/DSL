@@ -10,6 +10,7 @@ namespace Core\Entity;
 
 use BjyAuthorize\Provider\Role\ProviderInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ZfcUser\Entity\UserInterface;
 
@@ -57,6 +58,7 @@ class User implements UserInterface, ProviderInterface
 
     /**
      * @var int
+     * @ORM\Column(type="boolean")
      */
     protected $state;
 
@@ -230,5 +232,29 @@ class User implements UserInterface, ProviderInterface
     public function addRole($role)
     {
         $this->roles[] = $role;
+    }
+
+    /**
+     * Adicionar um papel para o utilizador.
+     *
+     * @param Role $role
+     *
+     * @return void
+     */
+    public function addRoles(Collection $roles)
+    {
+        foreach ($roles as $role) {
+            $this->roles->add($role);
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function removeRoles(Collection $roles)
+    {
+        foreach ($roles as $roles) {
+            $this->roles->removeElement($roles);
+        }
     }
 }

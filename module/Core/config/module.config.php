@@ -52,6 +52,18 @@ return array(
                     ),
                 ),
             ),
+            'dsl-power-users' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/core-users[/:action][/:id]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Core\Controller',
+                        'controller' => 'CadastroUsers',
+                        'action' => 'index',
+                    )
+                ),
+                'may_terminate' => true,
+            )
         ),
     ),
     'service_manager' => array(
@@ -75,7 +87,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Core\Controller\Index' => 'Core\Controller\IndexController'
+            'Core\Controller\Index' => 'Core\Controller\IndexController',
+            'Core\Controller\CadastroUsers' => 'Core\Controller\CadastroUsersController',
         ),
     ),
     'view_manager' => array(
