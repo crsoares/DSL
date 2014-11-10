@@ -11,6 +11,7 @@ return array(
     'ZfcBase' => array($vendorDir . '/zf-commons/zfc-base/src'),
     'Zend\\' => array($vendorDir . '/zendframework/zendframework/library'),
     'ZendXml' => array($vendorDir . '/zendframework/zendxml/library'),
+    'ZendDeveloperTools' => array($vendorDir . '/zendframework/zend-developer-tools/src'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
@@ -23,4 +24,5 @@ return array(
     'DoctrineORMModule\\' => array($vendorDir . '/doctrine/doctrine-orm-module/src'),
     'DoctrineModule\\' => array($vendorDir . '/doctrine/doctrine-module/src'),
     'DoctrineModuleTest\\' => array($vendorDir . '/doctrine/doctrine-module/tests'),
+    'BjyAuthorize\\' => array($vendorDir . '/bjyoungblood/bjy-authorize/src'),
 );

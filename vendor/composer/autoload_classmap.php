@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'ZendDeveloperTools\\Module' => $vendorDir . '/zendframework/zend-developer-tools/Module.php',
     'ZfcBase\\Module' => $vendorDir . '/zf-commons/zfc-base/Module.php',
     'ZfcUserDoctrineORM\\Entity\\User' => $vendorDir . '/zf-commons/zfc-user-doctrine-orm/src/ZfcUserDoctrineORM/Entity/User.php',
     'ZfcUserDoctrineORM\\Mapper\\User' => $vendorDir . '/zf-commons/zfc-user-doctrine-orm/src/ZfcUserDoctrineORM/Mapper/User.php',
