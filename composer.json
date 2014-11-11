@@ -15,7 +15,8 @@
         "doctrine/doctrine-orm-module": "0.*",
         "zf-commons/zfc-user": "*",
         "zf-commons/zfc-user-doctrine-orm": "*",
-        "bjyoungblood/bjy-authorize": "1.4.*"
+        "bjyoungblood/bjy-authorize": "1.4.*",
+        "rwoverdijk/assetmanager": "*"
 
     }
 }

@@ -9,6 +9,7 @@ return array(
         'ZfcUser',
         'ZfcUserDoctrineORM',
         'BjyAuthorize',
+        'AssetManager',
         'Core',
         'DSLTicket'
     ),

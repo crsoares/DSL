@@ -105,6 +105,7 @@ return array(
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
+            //'zfcuser' => __DIR__ . '/../view',
         ),
     ),
     // Placeholder for console routes
@@ -143,6 +144,14 @@ return array(
                 'object_manager' => 'doctrine.entitymanager.orm_default',
                 'role_entity_class' => __NAMESPACE__ . '\Entity\Role',
             ),
+        )
+    ),
+
+    'asset_manager' => array(
+        'resolver_configs' => array(
+            'paths' => array(
+                'Core' => __DIR__ . '/../public/',
+            )
         )
     )
 );
