@@ -10,8 +10,32 @@
 <br />
 <br />
 <?php echo $this->form()->openTag($form); ?>
-		<div class="form-group">
-			<?php echo $this->formRow($form->get('displayName')); ?>
-			<?php echo $this->formRow($form->get('username')); ?>
+		<div class="container" style="max-width: 500px;">
+			<div class="row">
+				<div class="form-group">
+					<?php echo $this->formRow($form->get('displayName')); ?>
+				</div>
+				<div class="form-group">
+					<?php echo $this->formRow($form->get('username')); ?>
+				</div>
+				<div class="form-group">
+					<?php echo $this->formRow($form->get('email')); ?>
+				</div>
+				<div class="form-group">
+					<?php echo $this->formRow($form->get('password')); ?>
+				</div>
+				<div class="form-group">
+					<?php echo $this->formRow($form->get('password_confirm')); ?>
+				</div>
+				<div class="form-group">
+					<?php echo $this->formRow($form->get('roles')); ?>
+				</div>
+				<div class="form-group">
+					<?php echo $this->formRow($form->get('state')); ?>
+				</div>
+				<div class="form-group">
+					<?php echo $this->formRow($form->get('salvar')); ?>
+				</div>
+			</div>
 		</div>
 <?php echo $this->form()->closeTag($form); ?>
