@@ -1,0 +1,63 @@
+<?php 
+$form = $this->registerForm;
+$form->prepare();
+$form->setAttribute('action', $this->url('zfcuser/register'));
+$form->setAttribute('mehtod', 'post');
+$form->get('email')->setAttributes(array('class' => 'form-control', 'placeholder' => 'email@email.com'));
+$form->get('password')->setAttributes(array('class' => 'form-control', 'placeholder' => 'Digite uma senha'));
+$form->get('passwordVerify')->setAttributes(array('class' => 'form-control', 'placeholder' => 'Verifique a senha'));
+$form->add(array(
+	'name' => 'submit',
+	'type' => 'submit',
+	'attributes' => array(
+		'value' => 'Registrar',
+		'class' => 'btn btn-lg btn-info btn-block',
+	)
+));
+?>
+<div class="container" style="margin-top: 40px;">
+	<div class="row">
+		<div class="col-sm-6 col-md-4 col-md-offset-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong>Registrar</strong>
+				</div>
+				<div class="panel-body">
+					<?php echo $this->form()->openTag($form); ?>
+						<fieldset>
+							<div class="row">
+								<div class="col-sm-12 col-md-10 col-md-offset-1">
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon">@</span>
+											<?php echo $this->formElement($form->get('email')); ?>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="glyphicon glyphicon-lock"></i>
+											</span>
+											<?php echo $this->formElement($form->get('password')); ?>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="glyphicon glyphicon-lock"></i>
+											</span>
+											<?php echo $this->formElement($form->get('passwordVerify')); ?>
+										</div>
+									</div>
+									<div class="form-group">
+										<?php echo $this->formElement($form->get('submit')); ?>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					<?php echo $this->form()->closeTag(); ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

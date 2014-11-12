@@ -1,6 +1,6 @@
 <div class="page-header">
 	<h3>
-		<?php echo $this->translate('Adicionar Novo Usuário') ?>
+		<?php //echo $this->translate('Adicionar Novo Usuário') ?>
 	</h3>
 </div>
 <a class="btn btn-info" href="<?php echo $this->url('dsl-power-users'); ?>">
@@ -9,8 +9,77 @@
 </a>
 <br />
 <br />
-<?php echo $this->form()->openTag($form); ?>
-		<div class="container" style="max-width: 500px;">
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6 col-md-4 col-md-offset-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<strong><?php echo $this->translate('Adicionar Novo Usuário'); ?></strong>
+				</div>
+				<div class="panel-body">
+					<?php echo $this->form()->openTag($form); ?>
+						<fieldset>
+							<div class="row">
+								<div class="col-sm-12 col-md-10 col-md-offset-1">
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="glyphicon glyphicon-user"></i>
+											</span>
+											<?php echo $this->formElement($form->get('displayName')); ?>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="glyphicon glyphicon-user"></i>
+											</span>
+											<?php echo $this->formElement($form->get('username')); ?>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon">@</span>
+											<?php echo $this->formElement($form->get('email')); ?>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="glyphicon glyphicon-lock"></i>
+											</span>
+											<?php echo $this->formElement($form->get('password')); ?>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="input-group">
+											<span class="input-group-addon">
+												<i class="glyphicon glyphicon-lock"></i>
+											</span>
+											<?php echo $this->formElement($form->get('password_confirm')); ?>
+										</div>
+									</div>
+									<div class="form-group">
+										<?php echo $this->formElement($form->get('roles')); ?>
+									</div>
+									<div class="form-group">
+										<?php echo $this->formElement($form->get('state')); ?>
+										<?php echo $this->formLabel($form->get('state')); ?>
+									</div>
+									<div class="form-group">
+										<?php echo $this->formElement($form->get('salvar')); ?>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					<?php echo $this->form()->closeTag($form); ?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php //echo $this->form()->openTag($form); ?>
+		<!-- <div class="container" style="max-width: 500px;">
 			<div class="row">
 				<div class="form-group">
 					<?php echo $this->formRow($form->get('displayName')); ?>
@@ -37,5 +106,5 @@
 					<?php echo $this->formRow($form->get('salvar')); ?>
 				</div>
 			</div>
-		</div>
-<?php echo $this->form()->closeTag($form); ?>
+		</div> -->
+<?php //echo $this->form()->closeTag($form); ?>

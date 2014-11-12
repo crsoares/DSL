@@ -20,7 +20,7 @@ class CadastroUsersForm extends Form
             'attributes' => array(
                 'class' => 'form-control input-sm',
                 'placeholder' => 'Digite Seu Nome.',
-                'style' => 'width: 500px;'
+                //'style' => 'width: 500px;'
             )
         ));
 
@@ -33,7 +33,7 @@ class CadastroUsersForm extends Form
             'attributes' => array(
                 'class' => 'form-control input-sm',
                 'placeholder' => 'Digite seu nome de Usuário.',
-                'style' => 'width: 500px'
+                //'style' => 'width: 500px'
             )
         ));
 
@@ -46,7 +46,7 @@ class CadastroUsersForm extends Form
             'attributes' => array(
                 'class' => 'form-control input-sm',
                 'placeholder' => 'email@email.com.br',
-                'style' => 'width: 500px;'
+                //'style' => 'width: 500px;'
             )
         ));
 
@@ -59,7 +59,7 @@ class CadastroUsersForm extends Form
             'attributes' => array(
                 'class' => 'form-control input-sm',
                 'placeholder' => 'Digite uma senha',
-                'style' => 'width: 500px;'
+                //'style' => 'width: 500px;'
             )
         ));
 
@@ -72,7 +72,7 @@ class CadastroUsersForm extends Form
             'attributes' => array(
                 'class' => 'form-control input-sm',
                 'placeholder' => 'Confirme a sua senha',
-                'style' => 'width: 500px;'
+                //'style' => 'width: 500px;'
             )
         ));
 
@@ -83,7 +83,7 @@ class CadastroUsersForm extends Form
                 'multiple' => 'multiple',
                 'class' => 'form-control input-sm',
                 'placeholder' => 'Selecione um Papel',
-                'style' => 'width: 500px; height: 100px;'
+                'style' => 'height: 100px;'
             ),
             'options' => array(
                 'label' => 'Papel',
@@ -114,7 +114,7 @@ class CadastroUsersForm extends Form
             'type' => 'submit',
             'attributes' => array(
                 'value' => 'Salvar',
-                'class' => 'btn btn-primary'
+                'class' => 'btn btn-info'
             )
         ));
     }

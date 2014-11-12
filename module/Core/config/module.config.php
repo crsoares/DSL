@@ -98,7 +98,8 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'login/layout'           => __DIR__ . '/../view/layout/login/layout.phtml',
+            'core/layout'          => __DIR__ . '/../view/layout/core/layout.phtml',
             'core/index/index' => __DIR__ . '/../view/core/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
@@ -107,6 +108,10 @@ return array(
             __DIR__ . '/../view',
             //'zfcuser' => __DIR__ . '/../view',
         ),
+    ),
+    'module_layouts' => array(
+        'Core'    => 'core/layout',
+        'ZfcUser' => 'login/layout',
     ),
     // Placeholder for console routes
     'console' => array(
