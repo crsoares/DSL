@@ -155,7 +155,7 @@ return array(
     'asset_manager' => array(
         'resolver_configs' => array(
             'paths' => array(
-                'Core' => __DIR__ . '/../public/',
+                'Core' => __DIR__ . '/../public',
             )
         )
     )

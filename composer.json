@@ -16,7 +16,8 @@
         "zf-commons/zfc-user": "*",
         "zf-commons/zfc-user-doctrine-orm": "*",
         "bjyoungblood/bjy-authorize": "1.4.*",
-        "rwoverdijk/assetmanager": "*"
+        "rwoverdijk/assetmanager": "*",
+        "sp/jms-serializer-module": "dev-master"
 
     }
 }

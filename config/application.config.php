@@ -10,9 +10,11 @@ return array(
         'ZfcUserDoctrineORM',
         'BjyAuthorize',
         'AssetManager',
+        'JMSSerializerModule',
         'EdpModuleLayouts',
         'Core',
-        'DSLTicket'
+        'DSLTicket',
+        'UserApi'
     ),
 
     // These are various options for the listeners attached to the ModuleManager
@@ -23,6 +25,7 @@ return array(
         // Module class.
         'module_paths' => array(
             './module',
+            './module/DSLApi',
             './vendor',
         ),
 
