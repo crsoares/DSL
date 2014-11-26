@@ -12,6 +12,7 @@ return array(
         'AssetManager',
         'JMSSerializerModule',
         'EdpModuleLayouts',
+        'ZfrRest',
         'Core',
         'DSLTicket',
         'UserApi'

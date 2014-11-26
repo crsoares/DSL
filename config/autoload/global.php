@@ -12,5 +12,15 @@
  */
 
 return array(
-    // ...
+    'zfr_rest' => array(
+    	'object_manager' => 'doctrine.entitymanager.orm_default',
+    	'drivers' => array(
+    		array(
+    			'class' => 'ZfrRest\Resource\Metadata\Driver\AnnotationDriver'
+    		)
+    	),
+    	'cache' => array(
+    		'adapter' => 'memory'
+    	)
+    )
 );

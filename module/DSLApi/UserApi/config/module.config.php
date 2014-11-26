@@ -13,6 +13,13 @@ return array(
                         'id' => '[a-zA-Z0-9_-]*',
                     )
                 )
+            ),
+            'users' => array(
+                'type' => 'ResourceGraphRoute',
+                'options' => array(
+                    'route' => '/users',
+                    'resource' => 'Core\Entity\User'
+                )
             )
         )
     ),

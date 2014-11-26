@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'ZfrRest\\' => array($vendorDir . '/zfr/zfr-rest/src'),
     'ZfcUserDoctrineORM' => array($vendorDir . '/zf-commons/zfc-user-doctrine-orm/src'),
     'ZfcUser' => array($vendorDir . '/zf-commons/zfc-user/src'),
     'ZfcBase' => array($vendorDir . '/zf-commons/zfc-base/src'),
