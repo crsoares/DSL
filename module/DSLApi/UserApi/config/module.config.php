@@ -14,18 +14,18 @@ return array(
                     )
                 )
             ),
-            'users' => array(
+            /*'users' => array(
                 'type' => 'ResourceGraphRoute',
                 'options' => array(
                     'route' => '/users',
                     'resource' => 'Core\Entity\User'
                 )
-            )
+            )*/
         )
     ),
     'controllers' => array(
         'invokables' => array(
-            'users' => 'UserApi\Controller\UserController',
+            //'users' => 'UserApi\Controller\UserController',
         )
     ),
     'view_manager' => array(
