@@ -13,21 +13,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ZfcUser\Entity\UserInterface;
-use ZfrRest\Resource\Metadata\Annotation as REST;
 
 /**
  * An example of how to implement a role aware user entity.
  *
  * @ORM\Entity
  * @ORM\Table(name="users")
- * @REST\Resource(
- *      controller="UserApi\Controller\UserController",
- *      inputFilter="UserApi\InputFilter\UserInputFilter",
- *      hydrator="Zend\Stdlib\Hydrator\ClassMethods"
- * )
- * @REST\Collection(
- *      controller="UserApi\Controller\UsersController"
- * )
  *
  * @author Tom Oram <tom@scl.co.uk>
  */

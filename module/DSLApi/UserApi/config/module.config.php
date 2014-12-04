@@ -1,36 +1,35 @@
 <?php
-namespace UserApi;
-
 return array(
     'router' => array(
         'routes' => array(
-            'users-api' => array(
+            'user-api.rest.doctrine.user' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
-                    'route' => '/api-user[/:controller][/:id]',
-                    'constraints' => array(
-                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id' => '[a-zA-Z0-9_-]*',
-                    )
-                )
+                    'route' => '/user-api/user[/:user_id]',
+                    'defaults' => array(
+                        'controller' => 'UserApi\\V1\\Rest\\User\\Controller',
+                    ),
+                ),
             ),
-            /*'users' => array(
-                'type' => 'ResourceGraphRoute',
-                'options' => array(
-                    'route' => '/users',
-                    'resource' => 'Core\Entity\User'
-                )
-            )*/
+        ),
+    ),
+    'zf-versioning' => array(
+        'url' => array(
+            0 => 'user-api.rest.doctrine.user',
         )
     ),
-    'controllers' => array(
-        'invokables' => array(
-            //'users' => 'UserApi\Controller\UserController',
-        )
-    ),
-    'view_manager' => array(
-        'strategies' => array(
-            'ViewJsonStrategy'
+    'zf-rest' => array(
+        'UserApi\\V1\\Rest\\User\\Controller' => array(
+            'listener' => 'UserApi\\V1\\Rest\\User\\UserResource',
+            'route_name' => 'user-api.rest.doctrine.user',
+            'route_identifier_name' => 'user_id',
+            'collection_name' => 'user',
+            'entity_http_methods' => array(
+                0 => 'GET',
+                1 => 'PATCH',
+                2 => 'PUT',
+                3 => 'DELETE',
+            ),
         )
     )
 );
