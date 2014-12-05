@@ -30,6 +30,32 @@ return array(
                 2 => 'PUT',
                 3 => 'DELETE',
             ),
+            'collection_http_methods' => array(
+                0 => 'query',
+                1 => 'orderBy',
+            ),
+            'page_size' => 25,
+            'page_size_param' => null,
+            'entity_class' => 'Core\\Entity\\User',
+            'collection_class' => 'UserApi\\V1\\Rest\\User\\UserCollection',
+        )
+    ),
+    'zf-content-negotiation' => array(
+        'controllers' => array(
+            'UserApi\\V1\\Rest\\User\\Controller' => 'HalJson',
+        ),
+        'accept-whitelist' => array(
+            'UserApi\\V1\\Rest\\User\\Controller' => array(
+                0 => 'application/vnd.user-api.v1+json',
+                1 => 'application/hal+json',
+                2 => 'application/json',
+            )
+        ),
+        'content-type-whitelist' => array(
+            'UserApi\\V1\\Rest\\User\\Controller' => array(
+                0 => 'application/vnd.db-api.v1+json',
+                1 => 'application/json',
+            )
         )
     )
 );
