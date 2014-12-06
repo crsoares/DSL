@@ -49,28 +49,28 @@ return array(
         'controllers' => array(
             'UserApi\\V1\\Rest\\User\\Controller' => 'HalJson',
         ),
-        'accept-whitelist' => array(
+        'accept_whitelist' => array(
             'UserApi\\V1\\Rest\\User\\Controller' => array(
                 0 => 'application/vnd.user-api.v1+json',
                 1 => 'application/hal+json',
                 2 => 'application/json',
             )
         ),
-        'content-type-whitelist' => array(
+        'content_type_whitelist' => array(
             'UserApi\\V1\\Rest\\User\\Controller' => array(
                 0 => 'application/vnd.db-api.v1+json',
                 1 => 'application/json',
             )
         )
     ),
-    'zf-ral' => array(
+    'zf-hal' => array(
         'metadata_map' => array(
             'Core\\Entity\\User' => array(
                 'route_identifier_name' => 'user_id',
                 'entity_identifier_name' => 'id',
                 'route_name' => 'user-api.rest.doctrine.user',
                 'hydrator' => 'UserApi\\V1\\Rest\\User\\UserHydrator',
-                'max_depth' => 2,
+                //'max_depth' => 2,
             ),
             'UserApi\\V1\\Rest\\User\\UserCollection' => array(
                 'entity_identifier_name' => 'id',
