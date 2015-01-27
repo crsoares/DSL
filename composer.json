@@ -20,7 +20,10 @@
         "sp/jms-serializer-module": "dev-master",
         "zfcampus/zf-apigility": "~1.0",
         "zfcampus/zf-apigility-documentation": "~1.0",
-        "zfcampus/zf-apigility-doctrine": "dev-master"
+        "zfcampus/zf-apigility-doctrine": "dev-master",
+        "ghislainf/zf2-whoops": "dev-master",
+        "dino/dompdf-module": "dev-master",
+        "jotjunior/boletophp-zf2": "dev-master"
 
     },
     "require-dev": {

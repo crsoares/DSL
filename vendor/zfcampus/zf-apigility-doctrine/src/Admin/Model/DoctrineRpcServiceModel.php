@@ -61,7 +61,7 @@ class DoctrineRpcServiceModel
      * Fetch a single RPC service
      *
      * @todo   get route details?
-     * @param  string                         $controllerServiceName
+     * @param  string $controllerServiceName
      * @return DoctrineRpcServiceEntity|false
      */
     public function fetch($controllerServiceName)
@@ -105,7 +105,8 @@ class DoctrineRpcServiceModel
             ) {
                 // @codeCoverageIgnoreStart
                 // Is this handled differently in recent versions of Apigility // FIXME: verify this\
-                $data['content_type_whitelist'] = $contentNegotiationConfig['content_type_whitelist'][$controllerServiceName];
+                $data['content_type_whitelist'] =
+                    $contentNegotiationConfig['content_type_whitelist'][$controllerServiceName];
             }
                 // @codeCoverageIgnoreEnd
         }
@@ -139,10 +140,13 @@ class DoctrineRpcServiceModel
         // and it's no longer handled here: FIXME: verify this
         if (null !== $version) {
             if (!in_array($version, $this->moduleEntity->getVersions())) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Invalid version "%s" provided',
-                    $version
-                ), 400);
+                throw new Exception\RuntimeException(
+                    sprintf(
+                        'Invalid version "%s" provided',
+                        $version
+                    ),
+                    400
+                );
             }
             $namespaceSep = preg_quote('\\');
             $pattern = sprintf(
@@ -158,7 +162,7 @@ class DoctrineRpcServiceModel
                 $services[] = $this->fetch($controllerService);
                 continue;
             }
-        // @codeCoverageIgnoreEnd
+            // @codeCoverageIgnoreEnd
 
             if (preg_match($pattern, $controllerService)) {
                 $services[] = $this->fetch($controllerService);
@@ -175,10 +179,10 @@ class DoctrineRpcServiceModel
      * Creates the controller and all configuration, returning the full configuration as a tree.
      *
      * @todo   Return the controller service name
-     * @param  string                   $serviceName
-     * @param  string                   $route
-     * @param  array                    $httpMethods
-     * @param  null|string              $selector
+     * @param  string      $serviceName
+     * @param  string      $route
+     * @param  array       $httpMethods
+     * @param  null|string $selector
      * @return DoctrineRpcServiceEntity
      */
     public function createService($serviceName, $route, $httpMethods, $selector, $options)
@@ -186,7 +190,9 @@ class DoctrineRpcServiceModel
         $serviceName = ucfirst($serviceName);
 
         if (!preg_match('/^[a-zA-Z][a-zA-Z0-9_]*(\\\[a-zA-Z][a-zA-Z0-9_]*)*$/', $serviceName)) {
-            /** @todo define exception in Rpc namespace */
+            /**
+ * @todo define exception in Rpc namespace
+*/
             // @codeCoverageIgnoreStart
             throw new CreationException('Invalid service name; must be a valid PHP namespace name.');
             // @codeCoverageIgnoreEnd
@@ -239,7 +245,7 @@ class DoctrineRpcServiceModel
     /**
      * Create a controller in the current module named for the given service
      *
-     * @param  string   $serviceName
+     * @param  string $serviceName
      * @return stdClass
      */
     public function createController($serviceName)
@@ -268,43 +274,54 @@ class DoctrineRpcServiceModel
 
         if (file_exists($classPath)) {
             // @codeCoverageIgnoreStart
-            throw new Exception\RuntimeException(sprintf(
-                'The controller "%s" already exists',
-                $className
-            ));
+            throw new Exception\RuntimeException(
+                sprintf(
+                    'The controller "%s" already exists',
+                    $className
+                )
+            );
             // @codeCoverageIgnoreEnd
         }
 
-        $view = new ViewModel(array(
+        $view = new ViewModel(
+            array(
             'module'      => $module,
             'classname'   => $className,
             'servicename' => $serviceName,
             'version'     => $version,
-        ));
+            )
+        );
 
-        $resolver = new Resolver\TemplateMapResolver(array(
+        $resolver = new Resolver\TemplateMapResolver(
+            array(
             'code-connected/rpc-controller' => __DIR__ . '/../../../view/doctrine/rpc-controller.phtml'
-        ));
+            )
+        );
 
         $view->setTemplate('code-connected/rpc-controller');
         $renderer = new PhpRenderer();
         $renderer->setResolver($resolver);
 
-        if (!file_put_contents($classPath,
-            "<?php\n" . $renderer->render($view))) {
+        if (!file_put_contents(
+            $classPath,
+            "<?php\n" . $renderer->render($view)
+        )) {
             // @codeCoverageIgnoreStart
             return false;
         }
             // @codeCoverageIgnoreEnd
 
         $fullClassName = sprintf('%s\\V%s\\Rpc\\%s\\%s', $module, $version, $serviceName, $className);
-        $this->configResource->patch(array(
+        $this->configResource->patch(
+            array(
             'controllers' => array(
                 'invokables' => array(
                     $controllerService => $fullClassName,
                 ),
             ),
-        ), true);
+            ),
+            true
+        );
 
         return (object) array(
             'class'   => $fullClassName,
@@ -507,7 +524,9 @@ class DoctrineRpcServiceModel
     public function updateContentNegotiationWhitelist($controllerService, $headerType, array $whitelist)
     {
         if (!in_array($headerType, array('accept', 'content_type'))) {
-            /** @todo define exception in Rpc namespace */
+            /**
+ * @todo define exception in Rpc namespace
+*/
             // @codeCoverageIgnoreStart
             throw new PatchException('Invalid content negotiation whitelist type provided', 422);
             // @codeCoverageIgnoreEnd
@@ -603,7 +622,7 @@ class DoctrineRpcServiceModel
         }
         $this->filter = new FilterChain();
         $this->filter->attachByName('WordCamelCaseToDash')
-                     ->attachByName('StringToLower');
+            ->attachByName('StringToLower');
 
         return $this->filter;
     }
@@ -611,8 +630,8 @@ class DoctrineRpcServiceModel
     /**
      * Retrieve the URL match for the given route name
      *
-     * @param  string       $routeName
-     * @param  array        $config
+     * @param  string $routeName
+     * @param  array  $config
      * @return false|string
      */
     protected function getRouteMatchStringFromModuleConfig($routeName, array $config)

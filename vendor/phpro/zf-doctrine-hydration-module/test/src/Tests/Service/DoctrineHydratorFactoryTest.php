@@ -56,7 +56,7 @@ class DoctrineHydratorFactoryTest extends \PHPUnit_Framework_TestCase
      */
     protected function stubObjectManager($objectManagerClass)
     {
-        $objectManager = $this->getMock($objectManagerClass, [], [], '', false);
+        $objectManager = $this->getMock($objectManagerClass, array(), array(), '', false);
         $this->serviceManager->setService('doctrine.default.object-manager', $objectManager);
 
         return $objectManager;
@@ -154,7 +154,7 @@ class DoctrineHydratorFactoryTest extends \PHPUnit_Framework_TestCase
         $this->serviceManager->setService('Config', $this->serviceConfig);
         $objectManager = $this->stubObjectManager('Doctrine\ODM\MongoDb\DocumentManager');
 
-        $hydratorFactory = $this->getMock('Doctrine\ODM\MongoDB\Hydrator\HydratorFactory', [], [], '', false);
+        $hydratorFactory = $this->getMock('Doctrine\ODM\MongoDB\Hydrator\HydratorFactory', array(), array(), '', false);
         $generatedHydrator = $this->getMock('Doctrine\ODM\MongoDB\Hydrator\HydratorInterface');
 
         $objectManager
@@ -174,6 +174,26 @@ class DoctrineHydratorFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Phpro\DoctrineHydrationModule\Hydrator\DoctrineHydrator', $hydrator);
         $this->assertInstanceOf('Phpro\DoctrineHydrationModule\Hydrator\ODM\MongoDB\DoctrineObject', $hydrator->getExtractService());
         $this->assertEquals($generatedHydrator, $hydrator->getHydrateService());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_be_possible_to_configure_a_custom_hydrator()
+    {
+        $this->serviceConfig['doctrine-hydrator']['custom-hydrator']['hydrator'] = 'custom.hydrator';
+        $this->serviceManager->setService('Config', $this->serviceConfig);
+
+        $this->hydratorManager
+            ->expects($this->once())
+            ->method('get')
+            ->with('custom.hydrator')
+            ->will($this->returnValue($this->getMock('Zend\Stdlib\Hydrator\ArraySerializable')));
+
+        $hydrator = $this->createOrmHydrator();
+
+        $this->assertInstanceOf('Zend\Stdlib\Hydrator\ArraySerializable', $hydrator->getHydrateService());
+        $this->assertInstanceOf('Zend\Stdlib\Hydrator\ArraySerializable', $hydrator->getExtractService());
     }
 
     /**

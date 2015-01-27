@@ -28,7 +28,10 @@ return array(
         'ZF\Apigility\Doctrine\Server',
         'Core',
         'DSLTicket',
-        'UserApi'
+        'PhpBoletoZf2',
+        'DOMPDFModule',
+        'UserApi',
+        'Zf2Whoops',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

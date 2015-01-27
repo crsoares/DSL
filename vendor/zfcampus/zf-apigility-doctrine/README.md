@@ -12,7 +12,7 @@ Installation of this module uses composer. For composer documentation, please re
 [getcomposer.org](http://getcomposer.org/).
 
 ```sh
-$ php composer.phar require zfcampus/zf-apigility-doctrine:dev-master
+$ php composer.phar require zfcampus/zf-apigility-doctrine "~0.3"
 ```
 
 This library provides two modules.  The first, ZF\Apigility\Doctrine\Server provides
@@ -35,7 +35,7 @@ for the object manager.
 
 ***/apigility/api/module[/:name]/doctrine[/:controller_service_name]***
 
-This is a Doctrine resource creation route like Apigility Rest `/apigility/api/module[/:name]/rest[/:controller_service_name]`
+This is a Doctrine resource creation route _like_ Apigility Rest `/apigility/api/module[/:name]/rest[/:controller_service_name]`
 POST Parameters:
 
 ```json
@@ -52,7 +52,6 @@ POST Parameters:
 }
 ```
 
-
 Hydrating Entities by Value or Reference
 ----------------------------------------
 
@@ -61,11 +60,11 @@ By default the admin tool hydrates entities by reference by setting `$config['do
 
 Custom Events
 =============
+
 It is possible to hook in on specific doctrine events of the type `DoctrineResourceEvent`.
 This way, it is possible to alter the doctrine entities or collections before or after a specific action is performed.
-The EVENT_FETCH_ALL_PRE works on the Query Builder from the fetch all query.  This allows you to modify the Query Builder before a fetch is performed.
 
-A list of all supported events:
+Supported events:
 ```
 EVENT_FETCH_POST = 'fetch.post';
 EVENT_FETCH_ALL_PRE = 'fetch-all.pre';
@@ -76,14 +75,29 @@ EVENT_UPDATE_PRE = 'update.pre';
 EVENT_UPDATE_POST = 'update.post';
 EVENT_PATCH_PRE = 'patch.pre';
 EVENT_PATCH_POST = 'patch.post';
+EVENT_PATCH_PRE = 'patch.pre';
+EVENT_PATCH_POST = 'patch.post';
+EVENT_PATCH_LIST_PRE = 'patch-all.pre';
+EVENT_PATCH_LIST_POST = 'patch-all.post';
 EVENT_DELETE_PRE = 'delete.pre';
 EVENT_DELETE_POST = 'delete.post';
 ```
 
-The EventManager is available through the StaticEventManager:
+Attach to events through the Shared Event Manager:
 
 ```php
-StaticEventManager::getInstance()->attach('ZF\Apigility\Doctrine\DoctrineResource', 'create.post', $callable);
+use ZF\Apigility\Doctrine\Server\Event\DoctrineResourceEvent;
+
+$sharedEvents = $this->getApplication()->getEventManager()->getSharedManager();
+
+$sharedEvents->attach(
+    'ZF\Apigility\Doctrine\DoctrineResource',
+    DoctrineResourceEvent::EVENT_CREATE_PRE,
+    function(DoctrineResourceEvent $e) {
+        $e->stopPropagation();
+        return new ApiProblem(400, 'Stop API Creation');
+    }
+);
 ```
 
 It is also possible to add custom event listeners to the configuration of a single doctrine-connected resource:
@@ -107,7 +121,7 @@ Multi-keyed entities
 --------------------
 
 You may delimit multi keys through the route parameter.  The default
-delimter is a period . (e.g. 1.2.3).  You may change the delimiter by
+delimiter is a period . (e.g. 1.2.3).  You may change the delimiter by
 setting the DoctrineResource::setMultiKeyDelimiter($value)
 
 
@@ -133,64 +147,73 @@ $objectManager->getRepository('Album')->findOneBy(
 The album(_id) is not a field on the Album entity and will be ignored.
 
 
-Collections
-===========
+Query Providers
+===============
 
-The API created with this library implements full featured and paginated
-collection resources.  A collection is returned from a GET call to an entity endpoint without
-specifying the id.  e.g. ```GET /api/resource```
+Query Providers are available for all find operations.  The find query provider is used to fetch an entity before it is acted upon for all DoctrineResource methods except create.
 
-Reserved GET variables
+A query provider returns a QueryBuilder object.  By using a custom query provider you may inject conditions specific to the resource or user without modifying the resource.  For instance, you may add a ```$queryBuilder->andWhere('user = ' . $event->getIdentity());``` in your query provider before returning the QueryBuilder created therein.  Other uses include soft deletes so the end user can only see the active records.
 
-```
-    orderBy
-    query
-```
-
-Providing a base query
-----------------------
-
-This module uses an empty Doctrine query-builder to create the base query for a collection.
-In some cases you want to have more control over the query-builder.
-For example: When using soft deletes, you want to make sure that the end-user can only see the active records.
-Therefore it is also possible to use your own query provider.
-
-A custom plugin manager is available to register your own query providers.
-This can be done through following configuration:
+A custom plugin manager is available to register your own query providers.  This can be done through this configuration:
 
 ```php
-'zf-collection-query' => array(
+'zf-apigility-doctrine-query-provider' => array(
     'invokables' => array(
-        'custom-query-provider' => 'Application\My\Custom\QueryProvider',
+        'entity_name_fetch_all' => 'Application\Query\Provider\EntityName\FetchAll',
     )
 ),
 ```
 
-You have to make sure that this registered class implements the `ApigilityFetchAllQuery` interface.
-When the query provider is registered, you have to attach it to the doctrine-connected resource configuration:
+When the query provider is registered attach it to the doctrine-connected resource configuration.  The default query provider is used if no specific query provider is set.  You may set query providers for these keys:
+
+* default
+* fetch
+* fetch_all
+* update
+* patch
+* delete
+
+* patch_all delegates to patch
+
 ```php
 'zf-apigility' => array(
     'doctrine-connected' => array(
         'Api\\V1\\Rest\\....' => array(
-            'query_provider' => 'custom-query-provider',
+            'query_providers' => array(
+                'default' => 'default_orm',
+                'fetch_all' => 'entity_name_fetch_all',
+                // or fetch, update, patch, delete
+            ),
         ),
     ),
 ),
 ```
 
-Sorting Collections
--------------------
+Query Create Filters
+==============
 
-Sort by columnOne ascending
+In order to filter or change data sent to a create statement before it is used to hydrate the entity you may use a query create filter.  Create filters are very similar to Query Providers in their implementation.  
 
+Create filters take the data as a parameter and return the data, modified or filtered.
+
+A custom plugin manager is available to register your own create filters.  This can be done through following configuration:
+
+```php
+'zf-apigility-doctrine-query-create-filter' => array(
+    'invokables' => array(
+        'entity_name' => 'Application\Query\CreateFilter\EntityName',
+    )
+),
 ```
-    /api/user_data?orderBy%5BcolumnOne%5D=ASC
+
+Register your Query Create Filter as:
+```php
+'zf-apigility' => array(
+    'doctrine-connected' => array(
+        'Api\\V1\\Rest\\....' => array(
+            'query_create_filter' => 'entity_name',
+            ...
+        ),
+    ),
+),
 ```
-
-Sort by columnOne ascending then columnTwo decending
-
-```
-    /api/user_data?orderBy%5BcolumnOne%5D=ASC&orderBy%5BcolumnTwo%5D=DESC
-```
-
-

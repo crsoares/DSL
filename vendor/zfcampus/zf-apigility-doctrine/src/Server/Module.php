@@ -9,8 +9,7 @@ namespace ZF\Apigility\Doctrine\Server;
 use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
 use Zend\ModuleManager\ModuleManager;
 
-class Module
-    implements DependencyIndicatorInterface
+class Module implements DependencyIndicatorInterface
 {
     public function getAutoloaderConfig()
     {
@@ -34,10 +33,17 @@ class Module
         $serviceListener = $sm->get('ServiceListener');
 
         $serviceListener->addServiceManager(
-            'ZfCollectionQueryManager',
-            'zf-collection-query',
-            'ZF\Apigility\Doctrine\Server\Collection\Query\ApigilityFetchAllQuery',
-            'getZfCollectionQueryConfig'
+            'ZfApigilityDoctrineQueryProviderManager',
+            'zf-apigility-doctrine-query-provider',
+            'ZF\Apigility\Doctrine\Server\Query\Provider\QueryProviderInterface',
+            'getZfApigilityDoctrineQueryProviderConfig'
+        );
+
+        $serviceListener->addServiceManager(
+            'ZfApigilityDoctrineQueryCreateFilterManager',
+            'zf-apigility-doctrine-query-create-filter',
+            'ZF\Apigility\Doctrine\Server\Query\CreateFilter\QueryCreateFilterInterface',
+            'getZfApigilityDoctrineQueryCreateFilterConfig'
         );
     }
 
@@ -48,6 +54,6 @@ class Module
      */
     public function getModuleDependencies()
     {
-        return ['Phpro\DoctrineHydrationModule'];
+        return array('Phpro\DoctrineHydrationModule');
     }
 }

@@ -11,6 +11,7 @@ use RuntimeException;
 
 error_reporting(E_ALL | E_STRICT);
 chdir(__DIR__);
+date_default_timezone_set('utc');
 
 /**
  * Test bootstrap, for setting up autoloading
@@ -87,7 +88,8 @@ class Bootstrap
             $loader->add('Zend', $zf2Path . '/Zend');
         } else {
             include $zf2Path . '/Zend/Loader/AutoloaderFactory.php';
-            AutoloaderFactory::factory(array(
+            AutoloaderFactory::factory(
+                array(
                 'Zend\Loader\StandardAutoloader' => array(
                     'autoregister_zf' => true,
                     'namespaces' => array(
@@ -96,7 +98,8 @@ class Bootstrap
                         'Test' => __DIR__ . '/../vendor/Test/',
                     ),
                 ),
-            ));
+                )
+            );
         }
     }
 
@@ -106,7 +109,9 @@ class Bootstrap
         $previousDir = '.';
         while (!is_dir($dir . '/' . $path)) {
             $dir = dirname($dir);
-            if ($previousDir === $dir) return false;
+            if ($previousDir === $dir) {
+                return false;
+            }
             $previousDir = $dir;
         }
 

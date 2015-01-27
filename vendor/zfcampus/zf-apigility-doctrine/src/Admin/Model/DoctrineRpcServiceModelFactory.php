@@ -41,11 +41,17 @@ class DoctrineRpcServiceModelFactory
     protected $sharedEventManager;
 
     /**
-     * @param ModuleUtils    $modules
-     * @param ConfigResource $config
+     * @param ModuleUtils                 $modules
+     * @param ConfigResource              $config
+     * @param SharedEventManagerInterface $sharedEvents
+     * @param ModuleModel                 $moduleModel
      */
-    public function __construct(ModuleUtils $modules, ConfigResourceFactory $configFactory, SharedEventManagerInterface $sharedEvents, ModuleModel $moduleModel)
-    {
+    public function __construct(
+        ModuleUtils $modules,
+        ConfigResourceFactory $configFactory,
+        SharedEventManagerInterface $sharedEvents,
+        ModuleModel $moduleModel
+    ) {
         $this->modules            = $modules;
         $this->configFactory      = $configFactory;
         $this->sharedEventManager = $sharedEvents;
@@ -53,13 +59,13 @@ class DoctrineRpcServiceModelFactory
     }
 
     /**
-     * @param  string          $module
+     * @param  string $module
      * @return RpcServiceModel
      */
     public function factory($module)
     {
         if (isset($this->models[$module])) {
-        // @codeCoverageIgnoreStart
+            // @codeCoverageIgnoreStart
             return $this->models[$module];
         }
         // @codeCoverageIgnoreEnd

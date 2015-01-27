@@ -16,7 +16,7 @@ class DoctrineMetadata2Test extends \Zend\Test\PHPUnit\Controller\AbstractHttpCo
     public function setUp()
     {
         $this->setApplicationConfig(
-                include __DIR__ . '/../../../../../config/application.config.php'
+            include __DIR__ . '/../../../../../config/application.config.php'
         );
         parent::setUp();
     }
@@ -35,44 +35,62 @@ class DoctrineMetadata2Test extends \Zend\Test\PHPUnit\Controller\AbstractHttpCo
         $serviceManager = $this->getApplication()->getServiceManager();
         $em = $serviceManager->get('doctrine.entitymanager.orm_default');
 
-        $this->getRequest()->getHeaders()->addHeaders(array(
+        $this->getRequest()->getHeaders()->addHeaders(
+            array(
             'Accept' => 'application/json',
-        ));
+            )
+        );
 
-        $this->dispatch('/apigility/api/module/DbApi/doctrine/DbApi%5CV1%5CRest%5CArtist%5CController', Request::METHOD_GET);
+        $this->dispatch(
+            '/apigility/api/module/DbApi/doctrine/DbApi%5CV1%5CRest%5CArtist%5CController',
+            Request::METHOD_GET
+        );
         $body = json_decode($this->getResponse()->getBody(), true);
         $this->assertArrayHasKey('controller_service_name', $body);
         $this->assertEquals('DbApi\V1\Rest\Artist\Controller', $body['controller_service_name']);
 
         $this->dispatch('/apigility/api/module/DbApi/doctrine?version=1', Request::METHOD_GET);
         $body = json_decode($this->getResponse()->getBody(), true);
-        $this->assertEquals('DbApi\V1\Rest\Artist\Controller', $body['_embedded']['doctrine'][0]['controller_service_name']);
+        $this->assertEquals(
+            'DbApi\V1\Rest\Artist\Controller',
+            $body['_embedded']['doctrine'][0]['controller_service_name']
+        );
 
         $this->dispatch('/apigility/api/module/DbApi/doctrine', Request::METHOD_GET);
         $body = json_decode($this->getResponse()->getBody(), true);
-        $this->assertEquals('DbApi\V1\Rest\Artist\Controller', $body['_embedded']['doctrine'][0]['controller_service_name']);
+        $this->assertEquals(
+            'DbApi\V1\Rest\Artist\Controller',
+            $body['_embedded']['doctrine'][0]['controller_service_name']
+        );
 
         $this->resource = $serviceManager->get('ZF\Apigility\Doctrine\Admin\Model\DoctrineRestServiceResource');
         $this->resource->setModuleName('DbApi');
         $this->assertEquals($this->resource->getModuleName(), 'DbApi');
 
-        $entity = $this->resource->patch('DbApi\\V1\\Rest\\Artist\\Controller', array(
-            'routematch' => '/doctrine-changed/test',
-            'httpmethods' => array('GET', 'POST', 'PUT'),
-            'selector' => 'new doctrine selector',
-            'accept_whitelist' => array('new whitelist accept'),
-            'content_type_whitelist' => array('new content whitelist'),
-        ));
+        $entity = $this->resource->patch(
+            'DbApi\\V1\\Rest\\Artist\\Controller',
+            array(
+                'routematch' => '/doctrine-changed/test',
+                'httpmethods' => array('GET', 'POST', 'PUT'),
+                'selector' => 'new doctrine selector',
+                'accept_whitelist' => array('new whitelist accept'),
+                'content_type_whitelist' => array('new content whitelist'),
+            )
+        );
 
         $this->rpcResource = $serviceManager->get('ZF\Apigility\Doctrine\Admin\Model\DoctrineRpcServiceResource');
         $this->rpcResource->setModuleName('DbApi');
-        $this->rpcResource->patch('DbApi\\V1\\Rpc\\Artistalbum\\Controller', array(
-            'routematch' => '/doctrine-rpc-changed/test',
-            'httpmethods' => array('GET', 'POST', 'PUT'),
-            'selector' => 'new selector',
-            'accept_whitelist' => array('new whitelist'),
-            'content_type_whitelist' => array('new content whitelist'),
-        ));
+        $this->rpcResource->
+            patch(
+                'DbApi\\V1\\Rpc\\Artistalbum\\Controller',
+                array(
+                'routematch' => '/doctrine-rpc-changed/test',
+                'httpmethods' => array('GET', 'POST', 'PUT'),
+                'selector' => 'new selector',
+                'accept_whitelist' => array('new whitelist'),
+                'content_type_whitelist' => array('new content whitelist'),
+                )
+            );
 
         // Test get model returns cached model
         $this->assertEquals($this->rpcResource->getModel(), $this->rpcResource->getModel());
@@ -84,7 +102,10 @@ class DoctrineMetadata2Test extends \Zend\Test\PHPUnit\Controller\AbstractHttpCo
         $this->dispatch('/apigility/api/module/DbApi/doctrine-rpc?version=1', Request::METHOD_GET);
         $this->dispatch('/apigility/api/module/DbApi/doctrine-rpc', Request::METHOD_GET);
         $body = json_decode($this->getResponse()->getBody(), true);
-        $this->assertEquals('DbApi\V1\Rpc\Artistalbum\Controller', $body['_embedded']['doctrine-rpc'][0]['controller_service_name']);
+        $this->assertEquals(
+            'DbApi\V1\Rpc\Artistalbum\Controller',
+            $body['_embedded']['doctrine-rpc'][0]['controller_service_name']
+        );
 
         foreach ($body['_embedded']['doctrine-rpc'] as $rpc) {
             $this->rpcResource->delete($rpc['controller_service_name']);

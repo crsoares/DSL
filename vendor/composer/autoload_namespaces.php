@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'zf2-whoops' => array($vendorDir . '/ghislainf/zf2-whoops/src'),
     'ZfcUserDoctrineORM' => array($vendorDir . '/zf-commons/zfc-user-doctrine-orm/src'),
     'ZfcUser' => array($vendorDir . '/zf-commons/zfc-user/src'),
     'ZfcBase' => array($vendorDir . '/zf-commons/zfc-base/src'),
@@ -15,11 +16,13 @@ return array(
     'ZendDiagnosticsTest\\' => array($vendorDir . '/zendframework/zenddiagnostics/tests'),
     'ZendDeveloperTools' => array($vendorDir . '/zendframework/zend-developer-tools/src'),
     'ZFTool\\' => array($vendorDir . '/zendframework/zftool/src'),
+    'Whoops' => array($vendorDir . '/filp/whoops/src'),
     'Test\\' => array($vendorDir . '/zfcampus/zf-apigility-admin/vendor'),
     'Symfony\\Component\\Process\\' => array($vendorDir . '/symfony/process'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src'),
     'PhpCollection' => array($vendorDir . '/phpcollection/phpcollection/src'),
+    'PhpBoletoZf2' => array($vendorDir . '/jotjunior/boletophp-zf2/src'),
     'OAuth2' => array($vendorDir . '/bshaffer/oauth2-server-php/src'),
     'Metadata\\' => array($vendorDir . '/jms/metadata/src'),
     'KevinGH\\Version' => array($vendorDir . '/kherge/version/src/lib'),
@@ -30,6 +33,7 @@ return array(
     'Herrera\\Phar\\Update' => array($vendorDir . '/herrera-io/phar-update/src/lib'),
     'Herrera\\Json' => array($vendorDir . '/herrera-io/json/src/lib'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
+    'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
     'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
@@ -40,6 +44,7 @@ return array(
     'DoctrineORMModule\\' => array($vendorDir . '/doctrine/doctrine-orm-module/src'),
     'DoctrineModule\\' => array($vendorDir . '/doctrine/doctrine-module/src'),
     'DoctrineModuleTest\\' => array($vendorDir . '/doctrine/doctrine-module/tests'),
+    'DOMPDFModule' => array($vendorDir . '/dino/dompdf-module/src'),
     'BjyAuthorize\\' => array($vendorDir . '/bjyoungblood/bjy-authorize/src'),
     'Assetic' => array($vendorDir . '/kriswallsmith/assetic/src'),
     'AssetManager' => array($vendorDir . '/rwoverdijk/assetmanager/src'),
